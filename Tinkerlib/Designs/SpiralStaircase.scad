@@ -18,7 +18,7 @@ STAIR_DATA=[30, 60, 2, 15, 15/50, 4, (60*2*1.1)/1.414];
 
 DETAIL=120;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 /**
  * Draw a nesting support pin.

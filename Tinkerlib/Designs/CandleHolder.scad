@@ -2,7 +2,7 @@
 DETAIL=60;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 
 module drawCandleHolderOrig()

@@ -1,4 +1,6 @@
 
+DETAIL=60;
+
 // Distance between wheels
 WHEEL_VERTICAL_OFFSET=0.1;
 
@@ -22,7 +24,6 @@ DRIVEN_WHEEL_CROSS_OFFSET=20 + DRIVEN_WHEEL_RADIUS - 5;
 
 NOTCHES=5;
 
-DETAIL=60;
 
 
 module drawDriveWheel()

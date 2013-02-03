@@ -7,7 +7,7 @@ SCREW_RADIUS=5/2;
 DETAIL=120;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 CLOSET_ROD_BUSHING=[
 	25,							/* BUSHING_LENGTH */

@@ -1,7 +1,7 @@
 DETAIL=30;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 module drawShell()
 {

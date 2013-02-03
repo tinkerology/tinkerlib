@@ -1,7 +1,7 @@
 DETAIL=130;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 ROD_INTERNAL_RADIUS=0;
 ROD_CAP_RADIUS=1;

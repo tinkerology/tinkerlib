@@ -12,7 +12,7 @@ SCREW_COUNTERSINK_RADIUS=2;
 DETAIL=30;
 FAST=0;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 module drawSaddle()
 {

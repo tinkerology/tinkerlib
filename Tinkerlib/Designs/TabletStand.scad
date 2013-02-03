@@ -1,6 +1,6 @@
 DETAIL=120;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 TABLET_STAND_SPACING=0;
 TABLET_STAND_THICKNESS=1;

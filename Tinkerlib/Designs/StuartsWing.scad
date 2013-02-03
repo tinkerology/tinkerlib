@@ -1,5 +1,5 @@
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 SCALE=0.8;
 

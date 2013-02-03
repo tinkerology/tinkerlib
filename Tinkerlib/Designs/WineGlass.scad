@@ -2,7 +2,7 @@
 DETAIL=120;
 FAST=0;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 WINE_GLASS_HEIGHT=0;
 WINE_GLASS_BOWL_RADIUS=1;

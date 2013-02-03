@@ -2,7 +2,7 @@
 DETAIL=30;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 MY_BUSHING_DATA_REEL_SUPPORT=[
 	12,							/* BUSHING_LENGTH */

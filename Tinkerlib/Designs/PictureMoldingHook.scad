@@ -9,7 +9,7 @@ LOWER_YOFFSET=THICKNESS*2;
 
 DETAIL=40;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 
 module drawHook()

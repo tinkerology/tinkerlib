@@ -1,7 +1,7 @@
 DETAIL=120;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 BOTTLE_OPENER_WIDTH=0;
 BOTTLE_OPENER_BOTTLE_RADIUS=1;

@@ -2,7 +2,7 @@
 DETAIL=120;
 FAST=0;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 PORT_RADIUS=((MM_PER_INCH*2.25)/2) + 1;
 SUPPORT_RADIUS=PORT_RADIUS+2.5;

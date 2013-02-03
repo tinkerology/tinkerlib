@@ -10,7 +10,7 @@ INNER_RADIUS=RADIUS-WALL_THICKNESS;
 SUPPORT_HEIGHT=20;
 CHAMFER=.5;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 module drawFlashlightBracket()
 {

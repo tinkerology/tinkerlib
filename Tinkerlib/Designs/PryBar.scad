@@ -1,6 +1,6 @@
 DETAIL=120;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 PRY_BAR_LENGTH=0;
 PRY_BAR_WIDTH=1;

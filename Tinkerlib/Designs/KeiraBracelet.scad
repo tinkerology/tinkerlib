@@ -2,7 +2,7 @@
 DETAIL=120;
 FAST=0;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 //drawRoundedCube([10,10,1],1);
 

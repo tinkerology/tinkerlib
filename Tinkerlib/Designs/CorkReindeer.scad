@@ -2,7 +2,7 @@
 DETAIL=90;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 
 CORK_RADIUS=10.25+0.05;

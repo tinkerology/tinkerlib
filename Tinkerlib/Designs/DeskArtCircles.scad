@@ -1,5 +1,5 @@
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 VASE_DATA_SIZE=0;
 VASE_DATA_WALL_THICKNESS=1;

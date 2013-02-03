@@ -182,3 +182,5 @@ module drawFinGallery()
 	translate([200,200,0])
 	drawFins(TEST_FINS_9);
 }
+
+drawFinGallery();

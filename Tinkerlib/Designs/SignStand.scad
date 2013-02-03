@@ -2,7 +2,7 @@
 DETAIL=30;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\Tinkerlib\TinkerLib.scad>;
 
 SUPPORT_SIGN_THICKNESS=0;
 SUPPORT_LENGTH_FRONT=1;
