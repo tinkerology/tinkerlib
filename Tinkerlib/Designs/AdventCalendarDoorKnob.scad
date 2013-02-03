@@ -1,0 +1,9 @@
+
+DETAIL=60;
+RADIUS=4;
+PEG_LENGTH=5;
+PEG_RADIUS=1.5;
+
+sphere(r=RADIUS, $fn=DETAIL);
+translate([0,0,PEG_LENGTH-1])
+cylinder(PEG_LENGTH, PEG_RADIUS, PEG_RADIUS, $fn=DETAIL);
