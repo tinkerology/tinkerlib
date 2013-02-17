@@ -725,6 +725,17 @@ module drawCylinderDifference(height, radius1, radius2, offset)
 	}
 }
 
+module drawCylinder(height, radius)
+{
+	cylinder(height,radius,radius,$fn=DETAIL);
+}
+
+module drawCone(height, radius1, radius2)
+{
+	cylinder(height,radius1,radius2,$fn=DETAIL);
+}
+
+
 /**
  *
  */
