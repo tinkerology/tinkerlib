@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Scales (incomplete)
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 PIVOT_HEIGHT=10;
 PIVOT_BASE=20;
 ARM_LENGTH=50;

@@ -1,4 +1,11 @@
 
+/********************************************************************
+ * TinkerLib : Landing gear bracket for 450 size helicopter
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
 
 THICKNESS=4.1;
 WIDTH=7.5;

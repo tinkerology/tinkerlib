@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Washers 
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 /*
  * Calibration test for inner and outer circles
  */
@@ -82,5 +90,5 @@ module towerOfBabelGame()
 	//drawWasher( 40, 5, 7 );
 }
 
-calibrationTest();
-//towerOfBabelGame();
+//calibrationTest();
+towerOfBabelGame();

@@ -1,4 +1,11 @@
 
+/********************************************************************
+ * TinkerLib : A library of helper functions for OpenSCAD
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 /**
  * Machine Information
  **/

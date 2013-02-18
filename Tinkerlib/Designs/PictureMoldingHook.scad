@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Hook for use with picture frame molding (incomplete)
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 UPPER_MOLDING_RADIUS=40;
 LOWER_MOLDING_RADIUS=20;
 WIDTH=6;

@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Tongs
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 include <..\Tinkerlib\TinkerLib.scad>;
 
 
@@ -19,8 +27,6 @@ MINI_CLIP_ANGLE=0;
 MINI_CLIP_HUB_SEPARATION=6;
 
 DETAIL=60;
-
-
 
 
 module drawHanger()
@@ -132,6 +138,6 @@ module drawMiniClipPlate()
 	}
 }
 
-drawMiniClipPlate();
-//drawTongs();
+//drawMiniClipPlate();
+drawTongs();
 

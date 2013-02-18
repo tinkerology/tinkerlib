@@ -1,3 +1,15 @@
+
+/********************************************************************
+ * TinkerLib : Bottle Opener
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ * 
+ * Inspired by Nick Starno's Bottle Opener on Thingiverse :
+ * http://www.thingiverse.com/thing:1842
+ *******************************************************************/
+
 DETAIL=120;
 FAST=1;
 

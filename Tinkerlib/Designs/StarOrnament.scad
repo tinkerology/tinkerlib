@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Star ornament and tree topper
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 FRAGMENTS=40;
 
 module drawStar(points, length, width, height)

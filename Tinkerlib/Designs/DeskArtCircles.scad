@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Vase 9
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 include <..\Tinkerlib\TinkerLib.scad>;
 
 VASE_DATA_SIZE=0;
@@ -152,7 +160,7 @@ function profile(index,vaseData) =
 
 module drawShape( vaseData, height, size1, size2 )
 {
-	radialCylinders( height, vaseData[VASE_DATA_SIZE], size1/10, size2/10, 30 );
+	drawRadialCylinders( height, vaseData[VASE_DATA_SIZE], size1/10, size2/10, 30 );
 }
 
 

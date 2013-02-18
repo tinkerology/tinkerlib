@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Test code
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 
 for ( h = [0 : 3 : 12 ])
 {
@@ -10,19 +18,3 @@ for ( h = [0 : 3 : 12 ])
 	}
 }
 
-/*
-rotate([45,45,0])
-cube([1,1,17]);
-
-rotate([45,45,72])
-cube([1,1,17]);
-
-rotate([144,45,45])
-cube([1,1,17]);
-
-rotate([216,45,45])
-cube([1,1,17]);
-
-rotate([288,45,45])
-cube([1,1,17]);
-*/

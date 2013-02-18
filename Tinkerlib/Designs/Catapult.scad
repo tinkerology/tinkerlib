@@ -1,4 +1,8 @@
 
+/**
+ * Inspired by http://www.thingiverse.com/thing:11910
+ **/
+
 BASE_WIDTH=23;
 BASE_LENGTH=48;
 BASE_THICKNESS=2.75;

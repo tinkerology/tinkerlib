@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Versailles pattern tile layout (incomplete)
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 GROUT_SIZE=.125;
 PATTERN_WIDTH=48+GROUT_SIZE*3;
 PATTERN_LENGTH=48+GROUT_SIZE*3;
@@ -13,7 +21,7 @@ module drawTile(width,height)
 	cube([width,height,.25]);
 }
 
-module drawVersaille()
+module drawVersailles()
 {
 	rotate([0,0,-90])
 	{
@@ -69,7 +77,7 @@ for ( x = [ 0 : xCount-1 ] )
 	{
 		color(COLORS[(x+y)%3])
 		translate([x*xSpacing, y*ySpacing, 0])
-		drawVersaille();
+		drawVersailles();
 	}
 }
 

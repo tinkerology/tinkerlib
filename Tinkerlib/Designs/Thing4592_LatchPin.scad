@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Modified latch pin for Thing #4592 (incomplete)
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 module drawLatchPinAndSpring()
 {
 	cube([48,3,6]);

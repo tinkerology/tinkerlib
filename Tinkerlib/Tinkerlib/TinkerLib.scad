@@ -444,6 +444,7 @@ module drawChamferedCube(sizes,chamferSize)
 /**
  * Draw a transparent view of the build area to check placement
  * of items.
+ * Inspired by http://www.thingiverse.com/thing:12831
  **/
 module drawBuildArea()
 {
@@ -454,6 +455,7 @@ module drawBuildArea()
 /**
  * Draw a transparent view of the build area to check placement
  * of items. 
+ * Inspired by http://www.thingiverse.com/thing:12831
  **/
 module drawBuildAreaXY()
 {

@@ -1,4 +1,15 @@
 
+/********************************************************************
+ * TinkerLib : Closet Rod Holder
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *
+ * This is a closet rod holder with an offset hole to allow for
+ * clothes hangers to have more space above the rod.
+ *******************************************************************/
+
 ROD_RADIUS=33/2;
 SUPPORT_RADIUS=ROD_RADIUS+4;
 FLANG_RADIUS=68/2;

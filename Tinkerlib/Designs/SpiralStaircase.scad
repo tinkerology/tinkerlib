@@ -1,3 +1,12 @@
+
+/********************************************************************
+ * TinkerLib : Spiral staircase
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 PIN_RADIUS=0;
 PIN_INNER_RADIUS=1;
 STUD_FUDGE=2;
@@ -124,7 +133,7 @@ module drawPrintablePlate()
 	drawStep(STAIR_DATA, STAIRCASE_PIN_DATA);
 }
 
-//drawStep(STAIR_DATA, STAIRCASE_PIN_DATA);
-drawBase(STAIR_DATA, STAIRCASE_PIN_DATA);
+drawStep(STAIR_DATA, STAIRCASE_PIN_DATA);
+//drawBase(STAIR_DATA, STAIRCASE_PIN_DATA);
 //drawTestSupports();
 //drawPrintablePlate();

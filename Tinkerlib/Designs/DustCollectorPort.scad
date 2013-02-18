@@ -1,4 +1,12 @@
 
+/********************************************************************
+ * TinkerLib : Shop vacuum dust port for a tool like a bandsaw
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
+
 ROD_RADIUS=58/2;
 SUPPORT_RADIUS=ROD_RADIUS+3;
 FLANG_RADIUS=SUPPORT_RADIUS+20;

@@ -1,12 +1,15 @@
 
-
-
-
+/********************************************************************
+ * TinkerLib : Snowman Earrings (incomplete)
+ * https://github.com/tinkerology/tinkerlib
+ * By Scott P Leslie (https://twitter.com/tinkerology)
+ * Licensed Under Creative Commons Attributions Share Alike 
+ * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
+ *******************************************************************/
 
 FACETS=20;
 RADIUS=10;
 HAT_SIZE=8;
-
 
 module drawRoundedCylinder(radius,height,cornerRadius=1,top=true,bottom=true)
 {
@@ -48,7 +51,7 @@ module drawBody()
 	sphere(RADIUS*0.6,$fn=FACETS);
 }
 
-drawRoundedCylinder(10,5,1,true,true);
+//drawRoundedCylinder(10,5,1,true,true);
 
-//drawBody();
-//drawHat();
+drawBody();
+drawHat();
