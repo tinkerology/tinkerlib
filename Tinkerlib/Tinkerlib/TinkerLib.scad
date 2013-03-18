@@ -14,7 +14,6 @@ MM_PER_INCH=25.4;
 // General global constants
 DIFFERENCE_FUDGE=0.001;
 ANGLE_FUDGE=.1;
-OVERLAP_FUDGE=0.01;
 
 // Bushing shoulder styles
 BUSHING_SHOULDER_STYLE_NONE=0;
@@ -77,11 +76,6 @@ CAP_BORDER=0.5;
  */
 function adjustInnerDiameter(d) = d*MACHINE_INSET_FUDGE_FACTOR+MACHINE_INSET_FUDGE;
 
-/**
- * Remove adjustment to an inner diameter measurement based on machine specific differences.
- */
-function deadjustInnerDiameter(d) = (d-MACHINE_INSET_FUDGE)/MACHINE_INSET_FUDGE_FACTOR;
-
 
 /**
  * Draws a "hole" for a captive nut to fit in based on the faster data passed in.
@@ -114,7 +108,7 @@ module drawCapHole(fastenerData)
 module drawRecessedHexNutHole(fastenerData)
 {
 	assign(
-		diam=adjustInnerDiameter(fastenerData[NUT_WIDTH]),
+		diam=fastenerData[NUT_WIDTH],
 		edgeWidth=tan(30)*fastenerData[NUT_WIDTH] )
 	{
 		cube([diam, edgeWidth, fastenerData[NUT_THICKNESS]], center=true);
@@ -135,9 +129,7 @@ module drawRecessedHexNutHole(fastenerData)
 module drawBoltHole(length, fastenerData, zfactor)
 {
 	// Draw the hole
-	cylinder(length+0.01,
-		adjustInnerDiameter(fastenerData[BOLT_RADIUS]),
-		adjustInnerDiameter(fastenerData[BOLT_RADIUS]), $fn=DETAIL);
+	drawCylinder(length+0.01, fastenerData[BOLT_RADIUS]);
 
 	// Draw captive nut hole
 	rotate([0,90,90])
@@ -156,9 +148,8 @@ module drawRecessedBoltHole(length, fastenerData, zfactor)
 {
 	// Draw the hole
 	translate([0,0,fastenerData[CAP_THICKNESS]-DIFFERENCE_FUDGE])
-	cylinder(length+0.01,
-		adjustInnerDiameter(fastenerData[BOLT_RADIUS])+BOLT_HOLE_BORDER/2,
-		adjustInnerDiameter(fastenerData[BOLT_RADIUS])+BOLT_HOLE_BORDER/2, $fn=DETAIL);
+	drawCylinder(length+0.01,
+		fastenerData[BOLT_RADIUS]+BOLT_HOLE_BORDER/2);
 
 	// Draw captive nut hole
 	rotate([0,90,90])
@@ -173,20 +164,11 @@ module drawRecessedBoltHole(length, fastenerData, zfactor)
 module drawScrewHole(length, radius, countersink_length, countersink_radius)
 {
 	// Draw the hole
-	cylinder(length+0.01, adjustInnerDiameter(radius), adjustInnerDiameter(radius), $fn=DETAIL);
+	drawCylinder(length+0.01, radius);
 
 	// Draw counter sink
-	cylinder(countersink_length, adjustInnerDiameter(countersink_radius), adjustInnerDiameter(radius), $fn=DETAIL);
+	drawCone(countersink_length, countersink_radius, radius);
 }
-
-//module drawScrewHoleYYY(length, radius, countersink_length, countersink_radius)
-//{
-//	// Draw the hole
-//	cylinder(length+0.01, adjustInnerDiameter(radius), adjustInnerDiameter(radius), $fn=DETAIL);
-//
-//	// Draw counter sink
-//	cylinder(countersink_length, adjustInnerDiameter(countersink_radius), adjustInnerDiameter(radius), $fn=DETAIL);
-//}
 
 /**
  * Uses minkowski to round over the edges of the ends of the cylinder.
@@ -195,20 +177,20 @@ module drawRoundedCylinder(height, radius1, radius2, roundover)
 {
 	if ( FAST == 1 )
 	{
-		cylinder(height, radius1, radius2, $fn=DETAIL);
+		drawCone(height, radius1, radius2);
 	}
 	else
 	{
 		minkowski()
 		{
-			cylinder(height, radius1, radius2, $fn=DETAIL);
+			drawCone(height, radius1, radius2);
 			sphere(r=roundover,$fn=DETAIL);
 		}
 	}
 }
 
 /**
- * Draw a cylinder with spheres at each end.
+ * Draw a cone with spheres at each end.
  */
 module drawRoundedRod(length,radius1,radius2)
 {
@@ -223,11 +205,16 @@ module drawRoundedRod(length,radius1,radius2)
 	drawHalfSphere(radius2);
 }
 
+/**
+ * Draw a cone with the ends rounded over.
+ * NOTE: This uses minkowski() when FAST == 0, so
+ * it can be very slow.
+ */
 module drawRoundedCone(height, radius1, radius2, roundover)
 {
 	if ( FAST == 1 )
 	{
-		cylinder(height, radius1, radius2, $fn=DETAIL);
+		drawCone(height, radius1, radius2);
 	}
 	else
 	{
@@ -239,23 +226,29 @@ module drawRoundedCone(height, radius1, radius2, roundover)
 	}
 }
 
+/**
+ * Draw a cylindrical tube with the specified radii.
+ */
 module drawTube(height, outer, inner)
 {
 	difference()
 	{
-		cylinder(height, outer, outer, $fn=DETAIL);
+		drawCylinder(height, outer);
 
-		cylinder(height, adjustInnerDiameter(inner), adjustInnerDiameter(inner), $fn=DETAIL);
+		drawCylinder(height, inner);
 	}
 }
 
+/**
+ * Draw a conical tube with the specified radii.
+ */
 module drawConicalTube(height, outer1, inner1, outer2, inner2)
 {
 	difference()
 	{
-		cylinder(height, outer1, outer2, $fn=DETAIL);
+		drawCone(height, outer1, outer2);
 
-		cylinder(height, adjustInnerDiameter(inner1), adjustInnerDiameter(inner2), $fn=DETAIL);
+		drawCone(height, inner1, inner2);
 	}
 }
 
@@ -739,7 +732,7 @@ module drawCone(height, radius1, radius2)
 
 
 /**
- *
+ * Draw a simple simple ruler with breaks every 25mm along the height
  */
 module drawRuler(height, width)
 {
@@ -748,4 +741,94 @@ module drawRuler(height, width)
 		translate([0,0,25*i])
 		cube([width,(width/10),24]);
 	}
+}
+
+
+module drawSphere(radius)
+{
+	sphere(radius, $fn=DETAIL);
+}
+
+
+module drawLinkedCylinders(length1, length2, angle, radius)
+{
+	drawCylinder(length1, radius);
+
+	translate([0, 0, length1])
+	drawSphere(radius);
+	translate([0, 0, length1])
+	drawSphere(radius);
+
+	translate([0, 0, length1])
+	rotate([angle,0,0])
+	drawCylinder(length2, radius);
+}
+
+module drawLinkedCylinderGroup(length1, lengths, angles, radius)
+{
+	drawCylinder(length1, radius);
+
+	translate([0, 0, length1])
+	drawSphere(radius);
+
+	for ( i = [ 0 : len(lengths) ] )
+	{
+		translate([0, 0, length1])
+		rotate([angles[i],0,0])
+		drawCylinder(lengths[i], radius);
+	}
+}
+
+module drawLinkedRods(length1, length2, angle, radius)
+{
+	drawRoundedRod(length1, radius, radius);
+
+	translate([0, 0, length1])
+	drawSphere(radius);
+
+	translate([0, 0, length1])
+	rotate([angle,0,0])
+	drawRoundedRod(length2, radius, radius);
+}
+
+module drawLinkedTubes(length1, length2, angle, outerRadius, innerRadius)
+{
+	difference()
+	{
+		drawLinkedCylinders(length1, length2, angle, outerRadius);
+
+		drawLinkedCylinders(length1, length2, angle, innerRadius);
+	}
+}
+
+
+/**
+ * Draw a transition from one radius to another with a cylinder at each
+ * end and a cone in the middle.
+ */
+module drawCylinderTransition(length, radius1, radius2, transitionLength)
+{
+	drawCylinder(transitionLength, radius1);
+
+	translate([0,0,transitionLength])
+	drawCone(length-(2*transitionLength), radius1, radius2);
+
+	translate([0,0,length-transitionLength])
+	drawCylinder(transitionLength, radius2);
+}
+
+
+/**
+ * Draw a transition from one radius to another with a cone at each
+ * end and a cylinder in the middle.
+ */
+module drawConeTransition(length, radius1, radius2, transitionLength)
+{
+	drawCone(transitionLength,radius1,(radius1+radius2)/2);
+
+	translate([0,0,transitionLength])
+	drawCylinder(length-(2*transitionLength),(radius1+radius2)/2);
+
+	translate([0,0,length-transitionLength])
+	drawCone(transitionLength,(radius1+radius2)/2, radius2);
 }

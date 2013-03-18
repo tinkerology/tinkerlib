@@ -7,16 +7,16 @@
  * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
  *******************************************************************/
 
-DETAIL=60;
+DETAIL=120;
 FAST=1;
 
 include <..\Tinkerlib\TinkerLib.scad>
 
 module drawPin(radius,length)
 {
-	cylinder( 4, 0, radius, $fn=DETAIL );
+	drawCone( 4, 0, radius );
 	translate([0,0,4])
-	cylinder( length-4, radius, radius, $fn=DETAIL );
+	drawCylinder( length-4, radius );
 }
 
 module drawEyeOrNose(size)
@@ -35,12 +35,12 @@ module drawScaryEye(size)
 	{
 		difference()
 		{
-			cylinder(2,size,size);
+			drawCylinder(2,size);
 
 			translate([0,size,0])
-			cylinder(2,size*1.5,size*1.5);
+			drawCylinder(2,size*1.5);
 			translate([size*2,0,0])
-			cylinder(2,size*1.5,size*1.5);
+			drawCylinder(2,size*1.5);
 		}
 	}
 }
@@ -50,7 +50,7 @@ module drawRoundNose(size)
 	drawPin(2,14);
 
 	translate([0,0,14])
-	cylinder(2,size,size);
+	drawCylinder(2,size);
 }
 
 module drawMouth(size)
@@ -59,7 +59,7 @@ module drawMouth(size)
 	translate([0,-3*size,0])
 	difference()
 	{
-		cylinder(2,size*6,size*6);
+		drawCylinder(2,size*6);
 
 		# translate([0,-4*size,0])
 		cylinder(2,size*8,size*8);

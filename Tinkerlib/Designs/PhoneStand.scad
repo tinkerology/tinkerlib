@@ -16,32 +16,31 @@ module drawBase()
 {
 	difference()
 	{
-		union()
-		{
-			// Draw base
-			translate([0,-20,0])
-			drawCylinderDifference(20, 50, 70, [30,-30,0]);
+		// Draw the outer part of the base
+		scale([1,.5,1])
+		drawCylinder(20,74);
 
-			translate([0,20,0])
-			drawCylinderDifference(20, 50, 70, [30,30,0]);
-		}
+		// Remove the inside back
+		translate([20,0,0])
+		scale([1,.55,1])
+		drawCylinder(20,70);
 
-		// Sculpt it down
-		translate([-5,50,65])
+		// Sculpt it down from above with a curve
+		translate([-20,50,85])
 		rotate([90,0,0])
-		cylinder(100,60,60,$fn=DETAIL);
+		scale([1.5,1,1])
+		drawCylinder(100,80);
 
 		// Make a goove for the bottom of the device
-		translate([-34,50,15])
+		translate([-66,50,15])
 		rotate([90,0,0])
-		cylinder(100,6,6,$fn=DETAIL);
-
+		drawCylinder(100,7);
 	}
 }
 
 module drawUprightSide()
 {
-	translate([-16,30,39])
+	translate([-45,30,39])
 	rotate([0,110,0])
 	drawCylinderDifference(5, 50, 70, [5,30,0]);
 }
@@ -53,6 +52,12 @@ module drawUpright()
 	drawUprightSide();
 }
 
+scale([1,1,1])
+{
 drawBase();
 drawUpright();
+}
+//rotate([0,90,0])
+//translate([0,0,-80])
 //drawRuler(120, 20);
+drawBuildArea();

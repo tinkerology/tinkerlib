@@ -48,4 +48,8 @@ module drawRotatedCube()
 }
 
 //drawRotatedCube();
+translate([-7,-7,0])
+cube([25,25,2]);
+translate([0,0,-5])
+scale([.7,.7,1])
 drawHollowCubes(40,.85);

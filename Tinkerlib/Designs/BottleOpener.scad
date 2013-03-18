@@ -54,7 +54,7 @@ module drawOpener(data)
 			// Draw a half cylinder to push on the bottle top and create the right angle
 			rotate([90,0,0])
 			translate([data[BOTTLE_OPENER_THICKNESS],22,-22])
-			drawRoundedCylinder(data[BOTTLE_OPENER_COIN_RADIUS]*2,
+			drawRoundedRod(data[BOTTLE_OPENER_COIN_RADIUS]*2,
 				data[BOTTLE_OPENER_THICKNESS]/4,data[BOTTLE_OPENER_THICKNESS]/4);
 		}
 
@@ -67,7 +67,7 @@ module drawOpener(data)
 		// Draw the lanyard hole
 		translate([0,data[BOTTLE_OPENER_WIDTH]/2,(data[BOTTLE_OPENER_HANDLE_LENGTH]-2)*-1*sqrt(2)+data[BOTTLE_OPENER_LANYARD_RADIUS]*8])
 		rotate([0,45,0])
-		# cylinder(data[BOTTLE_OPENER_THICKNESS]*10,data[BOTTLE_OPENER_LANYARD_RADIUS]*2,data[BOTTLE_OPENER_LANYARD_RADIUS]*2,$ofn=DETAIL);
+		# drawCylinder(data[BOTTLE_OPENER_THICKNESS]*10,data[BOTTLE_OPENER_LANYARD_RADIUS]*2);
 	}
 }
 

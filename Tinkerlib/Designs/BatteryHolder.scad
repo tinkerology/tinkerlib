@@ -10,7 +10,7 @@
 DETAIL=120;
 FAST=1;
 
-include <TinkerLib.scad>;
+include <..\TinkerLib\TinkerLib.scad>;
 
 BATTERY_HOLDER_RADIUS=0;
 BATTERY_HOLDER_XCOUNT=1;

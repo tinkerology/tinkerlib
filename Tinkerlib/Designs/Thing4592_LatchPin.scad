@@ -7,21 +7,27 @@
  * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
  *******************************************************************/
 
+THICKNESS=2.5;
+SPRING_LENGTH=48;
+SPRING_HEIGHT=7;
+LATCH_LENGTH=36.5;
+OFFSET=8;
+
 module drawLatchPinAndSpring()
 {
-	cube([48,3,6]);
+	cube([SPRING_LENGTH,THICKNESS,SPRING_HEIGHT]);
 
 	difference()
 	{
 		color("blue")
 		rotate(-90)
-		cube([35,3,6]);
+		cube([LATCH_LENGTH,THICKNESS,SPRING_HEIGHT]);
 
 		color("green")
 		rotate(-90)
-		translate([35,-8,0])
+		translate([LATCH_LENGTH,-OFFSET,0])
 		rotate(45)
-		cube([8,8,8]);
+		cube([OFFSET,OFFSET,OFFSET]);
 	}
 }
 
