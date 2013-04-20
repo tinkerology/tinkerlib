@@ -7,7 +7,7 @@
  * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
  *******************************************************************/
 
-DETAIL=120;
+DETAIL=30;
 FAST=0;
 
 include <..\Tinkerlib\TinkerLib.scad>;
@@ -42,27 +42,102 @@ module drawBandsawPort()
 //	cube([PORT_RADIUS*2,2,5], center=true);
 }
 
-MINIFOLD_INPUT_RADIUS=0;
-MINIFOLD_OUTPUT_RADIUS=1;
-MINIFOLD_OUTPUT_COUNT=2;
-MINIFOLD_INPUT_PORT_DEPTH=3;
-MINIFOLD_OUTPUT_PORT_DEPTH=4;
+MANIFOLD_INPUT_RADIUS=0;
+MANIFOLD_OUTPUT_RADIUS=1;
+MANIFOLD_INPUT_COUNT=2;
+MANIFOLD_OUTPUT_COUNT=3;
+MANIFOLD_INPUT_PORT_DEPTH=4;
+MANIFOLD_OUTPUT_PORT_DEPTH=5;
+MANIFOLD_INPUT_PORT_OFFSET=6;
+MANIFOLD_OUTPUT_PORT_OFFSET=7;
+MANIFOLD_WALL_THICKNESS=8;
 
 AIR_MANIFOLD_TEST1=[
-	10,		/* MINIFOLD_INPUT_RADIUS */
-	5,		/* MINIFOLD_OUTPUT_RADIUS */
-	6,		/* MINIFOLD_OUTPUT_COUNT */
-	20,		/* MINIFOLD_INPUT_PORT_DEPTH */
-	20,		/* MINIFOLD_OUTPUT_PORT_DEPTH */
+	MM_PER_INCH*(5/8)/2,		/* MANIFOLD_INPUT_RADIUS */
+	(MM_PER_INCH/4)/2,		/* MANIFOLD_OUTPUT_RADIUS */
+	2,						/* MANIFOLD_INPUT_COUNT */
+	4,						/* MANIFOLD_OUTPUT_COUNT */
+	20,						/* MANIFOLD_INPUT_PORT_DEPTH */
+	20,						/* MANIFOLD_OUTPUT_PORT_DEPTH */
+	20,						/* MANIFOLD_INPUT_PORT_OFFSET */
+	10,						/* MANIFOLD_OUTPUT_PORT_OFFSET */
+	1.5,					/* MANIFOLD_WALL_THICKNESS */
 ];
 
-module drawManifold(inputRadius, outputRadius, outputCount, portDepth)
+AIR_MANIFOLD_TEST2=[
+	(MM_PER_INCH*(5/8)/2)-1.5,	/* MANIFOLD_INPUT_RADIUS */
+	((MM_PER_INCH/4)/2)-1.5,		/* MANIFOLD_OUTPUT_RADIUS */
+	2,						/* MANIFOLD_INPUT_COUNT */
+	4,						/* MANIFOLD_OUTPUT_COUNT */
+	20,						/* MANIFOLD_INPUT_PORT_DEPTH */
+	20,						/* MANIFOLD_OUTPUT_PORT_DEPTH */
+	20+3,					/* MANIFOLD_INPUT_PORT_OFFSET */
+	10+3,					/* MANIFOLD_OUTPUT_PORT_OFFSET */
+	1.5,					/* MANIFOLD_WALL_THICKNESS */
+];
+
+
+module drawManifoldData(data)
+{
+	translate([0,
+		-1*(data[MANIFOLD_OUTPUT_RADIUS]*2*data[MANIFOLD_OUTPUT_COUNT]+
+			data[MANIFOLD_OUTPUT_PORT_OFFSET]*(data[MANIFOLD_OUTPUT_COUNT]-1)),0])
+	{
+	// Draw the input ports
+	for ( x = [ 0 : data[MANIFOLD_INPUT_COUNT]-1 ] )
+	{
+		translate([0,data[MANIFOLD_INPUT_RADIUS]*2*x+
+					  data[MANIFOLD_INPUT_PORT_OFFSET]*x,0])
+		rotate([0,-90,0])
+		drawCylinderTransition(data[MANIFOLD_INPUT_PORT_DEPTH]*3,
+			data[MANIFOLD_OUTPUT_RADIUS],
+			data[MANIFOLD_INPUT_RADIUS],
+			data[MANIFOLD_INPUT_PORT_DEPTH]);
+	}
+
+	// Draw the output ports
+	for ( x = [ 0 : data[MANIFOLD_OUTPUT_COUNT]-1 ] )
+	{
+		translate([0,
+		(data[MANIFOLD_OUTPUT_RADIUS]*2+data[MANIFOLD_OUTPUT_PORT_OFFSET])*x,0])
+		drawSphere(data[MANIFOLD_OUTPUT_RADIUS]);
+		translate([0,
+		(data[MANIFOLD_OUTPUT_RADIUS]*2+data[MANIFOLD_OUTPUT_PORT_OFFSET])*x,0])
+		rotate([0,90,0])
+		drawCylinder(data[MANIFOLD_OUTPUT_PORT_DEPTH], data[MANIFOLD_OUTPUT_RADIUS]);
+	}
+
+	// Draw the cross duct
+	rotate([-90,0,0])
+	drawCylinder(data[MANIFOLD_OUTPUT_RADIUS]*2*data[MANIFOLD_OUTPUT_COUNT]+
+		data[MANIFOLD_OUTPUT_PORT_OFFSET]*(data[MANIFOLD_OUTPUT_COUNT]-1)-
+		data[MANIFOLD_OUTPUT_RADIUS]*2,
+		data[MANIFOLD_OUTPUT_RADIUS]);
+	}
+}
+
+module drawManifoldTubeData(data,data2)
+{
+	difference()
+	{
+		drawManifoldData(data);
+
+		translate([0,-3,0])
+		drawManifoldData(data2);
+	}
+}
+
+module drawManifold(inputRadius, outputRadius, inputCount, outputCount, portDepth)
 {
 	translate([0,-1*(outputRadius*1.5)*(outputCount-1),0])
 	{
-	translate([0,(outputRadius*1.5)*(outputCount-1),0])
-	rotate([0,-90,0])
-	drawCylinderTransition(portDepth*3, outputRadius, inputRadius, portDepth);
+	for ( x = [ 0 : inputCount-1 ] )
+	{
+		translate([0,(inputRadius*2.5)*x*(inputCount-1),0])
+		rotate([0,-90,0])
+		drawCylinderTransition(portDepth*3, outputRadius,
+			inputRadius, portDepth);
+	}
 
 	for ( x = [ 0 : outputCount-1 ] )
 	{
@@ -78,20 +153,29 @@ module drawManifold(inputRadius, outputRadius, outputCount, portDepth)
 	}
 }
 
-module drawManifoldTube(inputRadius, outputRadius, outputCount, portDepth, tubeThickness)
+module drawDustCollectionManifold()
 {
 	difference()
 	{
-		drawManifold(inputRadius, outputRadius, outputCount, portDepth);
-		drawManifold(inputRadius-tubeThickness, outputRadius-tubeThickness, outputCount, portDepth);
+		translate([-56,-105,-20])
+		drawChamferedCube([50,105,50],1);
+
+		drawManifoldData(AIR_MANIFOLD_TEST1);
+		
+		translate([-60,-50,125])
+		rotate([0,90,0])
+		scale([1,1.5,1])
+		drawCylinder(100,100);
 	}
 }
+//drawDustCollectionManifold();
+
+drawManifoldData(AIR_MANIFOLD_TEST1);
+//drawManifoldTubeData(AIR_MANIFOLD_TEST1,AIR_MANIFOLD_TEST2);
 
 //drawBandsawPort();
 
-drawManifold(10, 5, 6, 20);
 
-//drawManifoldTube(10, 5, 6, 20, 1.5);
 
 //drawLinkedCylinders(20, 30, 45, 5 );
 //drawLinkedTubes(20, 30, 15, 5, 4 );

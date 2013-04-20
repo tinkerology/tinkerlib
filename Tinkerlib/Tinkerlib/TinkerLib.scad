@@ -240,6 +240,21 @@ module drawTube(height, outer, inner)
 }
 
 /**
+ * Draw a cylindrical tube with the specified radii.
+ */
+module drawRectangleTube(size, thickness)
+{
+	translate([-1*size[0]/2, -1*size[1]/2,0])
+	difference()
+	{
+		cube(size);
+
+		translate([thickness/2, thickness/2, 0])
+		cube([size[0]-thickness, size[1]-thickness, size[2]+DIFFERENCE_FUDGE]);
+	}
+}
+
+/**
  * Draw a conical tube with the specified radii.
  */
 module drawConicalTube(height, outer1, inner1, outer2, inner2)
@@ -286,6 +301,9 @@ module drawCylinderArc180(height, radius, angle)
 	}
 }
 
+/**********************************************************
+ * Draw an arc of a cylinder
+ *********************************************************/
 module drawCylinderArc(height, radius, angle)
 {
 	if ( angle > 180 )
@@ -314,6 +332,9 @@ module drawTubeArc(height, outerRadius, innerRadius, angle)
 }
 
 
+/**********************************************************
+ * 
+ *********************************************************/
 module drawRoundedCube2( size, roundover, edges)
 {
 	width = size[0] - roundover*2;
@@ -348,6 +369,9 @@ module drawRoundedCube2( size, roundover, edges)
 	cube([width,depth+roundover*2,h]);
 }
 
+/**********************************************************
+ * 
+ *********************************************************/
 module drawRoundedCube(size, radius)
 {
 	if ( FAST == 1 )
@@ -445,20 +469,20 @@ module drawBuildArea()
 	cube([MACHINE_SIZE_X,MACHINE_SIZE_Y,MACHINE_SIZE_Z], center = true);
 }
 
-/**
+/********************************************************************
  * Draw a transparent view of the build area to check placement
  * of items. 
  * Inspired by http://www.thingiverse.com/thing:12831
- **/
+ *******************************************************************/
 module drawBuildAreaXY()
 {
 	%translate([MACHINE_SIZE_X/2,MACHINE_SIZE_Y/2,MACHINE_SIZE_Z/2])
 	cube([MACHINE_SIZE_X,MACHINE_SIZE_Y,MACHINE_SIZE_Z], center = true);
 }
 
-/**
+/********************************************************************
  * Replicate an STL file along the X access with the given spacing
- **/
+ *******************************************************************/
 module replicateOnX( filename, count, spacing )
 {
 	for ( i = [ 0 : count-1 ] )
@@ -468,9 +492,9 @@ module replicateOnX( filename, count, spacing )
 	}
 }
 
-/**
+/********************************************************************
  * Replicate an STL file in a grid with the given spacing
- **/
+ *******************************************************************/
 module replicateOnGrid( filename, xCount, yCount, xSpacing, ySpacing )
 {
 	for ( x = [ 0 : xCount-1 ] )
@@ -528,7 +552,21 @@ module drawRadialCubes( size, radialDistance, angle )
 	{
 		rotate([0, 0, angle*i])
 		translate([radialDistance, 0, size[2]/2])
-		cube(size, center=true, $fn=DETAIL);
+		cube(size, center=true);
+	}
+}
+
+/**
+ * Draw the child elements repeated in a circle at the
+ * specified distance and angle.
+ */
+module drawRadialShapes( radialDistance, angle )
+{
+	for ( i = [ 0 : (360/angle)-1 ] )
+	{
+		rotate([0, 0, angle*i])
+		translate([radialDistance, 0, 0])
+		child(0);
 	}
 }
 
@@ -537,6 +575,9 @@ module drawRadialCubes( size, radialDistance, angle )
 // Bushing Routines
 //*********************************************************************
 
+/**********************************************************
+ * 
+ *********************************************************/
 module drawBushing( data )
 {
 	if ( data[BUSHING_SHOULDER_STYLE] == BUSHING_SHOULDER_STYLE_SOLID )
@@ -592,6 +633,9 @@ module drawBushing( data )
 	}
 }
 
+/**********************************************************
+ * 
+ *********************************************************/
 module drawPlateOfBushings( data, xCount, yCount )
 {
 	drawBuildArea();
@@ -684,6 +728,9 @@ module drawHalfSphereShell(radius,thickness)
 	}
 }
 
+/**********************************************************
+ * 
+ *********************************************************/
 module drawEquilateralTriangle(height,side)
 {
 	difference()
@@ -698,42 +745,58 @@ module drawEquilateralTriangle(height,side)
 	}
 }
 
-
+/**********************************************************
+ * Draw a spherical shell with the specified radii.
+ *********************************************************/
 module drawSphereShell(outerRadius, innerRadius)
 {
 	difference()
 	{
-		sphere(outerRadius, $fn=DETAIL);
+		drawSphere(outerRadius);
 
-		sphere(innerRadius, $fn=DETAIL);
+		drawSphere(innerRadius);
 	}
 }
 
+/**********************************************************
+ * Draw a cylinder/cone of the specified height and radius1.
+ * Then difference out another cylinder of the same height
+ * and radius2 translated by offset.
+ *********************************************************/
 module drawCylinderDifference(height, radius1, radius2, offset)
 {
 	difference()
 	{
-		cylinder(height,radius1,radius1,$fn=DETAIL);
+		drawCylinder(height,radius1);
 
 		translate(offset)
-		cylinder(height,radius2,radius2,$fn=DETAIL);
+		drawCylinder(height,radius2);
 	}
 }
 
+/**********************************************************
+ * Draw a cylinder with the specified height and radius.
+ * DETAIL is used as the $fn parameter.
+ *********************************************************/
 module drawCylinder(height, radius)
 {
 	cylinder(height,radius,radius,$fn=DETAIL);
 }
 
+/**********************************************************
+ * Draw a cone with the specified height and radii.
+ * DETAIL is used as the $fn parameter.
+ *********************************************************/
 module drawCone(height, radius1, radius2)
 {
 	cylinder(height,radius1,radius2,$fn=DETAIL);
 }
 
 
-/**
- * Draw a simple simple ruler with breaks every 25mm along the height
- */
+/**********************************************************
+ * Draw a simple simple ruler with breaks every 25mm along
+ * the height.
+ *********************************************************/
 module drawRuler(height, width)
 {
 	for (i = [0:height/25])
@@ -744,12 +807,22 @@ module drawRuler(height, width)
 }
 
 
+/**********************************************************
+ * Draw a sphere with the specified radius and use
+ * DETAIL as the $fn parameter.
+ *********************************************************/
 module drawSphere(radius)
 {
 	sphere(radius, $fn=DETAIL);
 }
 
 
+/**********************************************************
+ * Draw two cylinders of the specified lengths separated
+ * by the specified angle.  Join the cylinders with a
+ * sphere in between.  The cylinders will both be the
+ * specified radius.
+ *********************************************************/
 module drawLinkedCylinders(length1, length2, angle, radius)
 {
 	drawCylinder(length1, radius);
@@ -764,6 +837,12 @@ module drawLinkedCylinders(length1, length2, angle, radius)
 	drawCylinder(length2, radius);
 }
 
+/**********************************************************
+ * Draw a cylinder of length length1 and a number of
+ * other cylinders of the specified lengths at the
+ * specified angles from the base cylinder. All cylinders
+ * will be the specified radius.
+ *********************************************************/
 module drawLinkedCylinderGroup(length1, lengths, angles, radius)
 {
 	drawCylinder(length1, radius);
@@ -779,6 +858,11 @@ module drawLinkedCylinderGroup(length1, lengths, angles, radius)
 	}
 }
 
+/**********************************************************
+ * Draw two rods (sphere end cylinders) of the specified
+ * lengths separated by the specified angle. The rods will
+ * have the specified radius.
+ *********************************************************/
 module drawLinkedRods(length1, length2, angle, radius)
 {
 	drawRoundedRod(length1, radius, radius);
@@ -791,6 +875,11 @@ module drawLinkedRods(length1, length2, angle, radius)
 	drawRoundedRod(length2, radius, radius);
 }
 
+/**********************************************************
+ * Draw two tubes of the specified lengths separated
+ * by the specified angle. The tubes will have the
+ * specified inner and outer radii.
+ *********************************************************/
 module drawLinkedTubes(length1, length2, angle, outerRadius, innerRadius)
 {
 	difference()

@@ -43,6 +43,10 @@ module drawUprightSide()
 	translate([-45,30,39])
 	rotate([0,110,0])
 	drawCylinderDifference(5, 50, 70, [5,30,0]);
+
+	translate([-53,7.5,8])
+	rotate([0,10,0])
+	drawRadiusCylinder(3, 4.5, 2);
 }
 
 module drawUpright()
