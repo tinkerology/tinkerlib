@@ -9,7 +9,7 @@
 
 include <..\TinkerLib\TinkerLib.scad>;
 
-DETAIL=120;
+DETAIL=20;
 
 TREFOIL_KNOT_SHAPE=0;
 TREFOIL_KNOT_START=1;
