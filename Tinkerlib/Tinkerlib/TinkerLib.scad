@@ -526,6 +526,21 @@ module drawGridOfCylinders( height, xCount, yCount, xSpacing, ySpacing, cylinder
 	}
 }
 
+/**
+ * Draw a grid of shapes at equal spacing.
+ **/
+module drawGridOf( xCount, yCount, xSpacing, ySpacing)
+{
+	for ( x = [ 0 : xCount-1 ] )
+	{
+		for ( y = [ 0 : yCount-1 ] )
+		{
+			translate([xSpacing*x, xSpacing*y, 0])
+			child(0);
+		}
+	}
+}
+
 //*********************************************************************
 // Radial Shape Group Routines
 //*********************************************************************
