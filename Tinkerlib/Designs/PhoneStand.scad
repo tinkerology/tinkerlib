@@ -7,7 +7,7 @@
  * (http://creativecommons.org/licenses/by-sa/3.0/deed.en_US)
  *******************************************************************/
 
-DETAIL=120;
+DETAIL=30;
 FAST=0;
 
 include <..\Tinkerlib\TinkerLib.scad>;
@@ -56,12 +56,38 @@ module drawUpright()
 	drawUprightSide();
 }
 
-scale([1,1,1])
+module drawPhoneStand()
 {
-drawBase();
-drawUpright();
+	scale([1,1,1])
+	{
+		difference()
+		{
+			drawBase();
+
+			
+			rotate([0,90,0`])
+			% drawRoundedRod(30,2,2);
+/*
+			// Make the bottom of the stand hollow
+			scale([0.8,0.8,1])
+			translate([-10,0,0])
+			difference()
+			{
+				drawBase();
+
+				translate([-100,-100,2])
+				cube([200,200,200]);
+				translate([-10,-50,0])
+				cube([10,100,100]);
+			}
+*/
+		}
+//		drawUpright();
+	}
 }
+
 //rotate([0,90,0])
 //translate([0,0,-80])
 //drawRuler(120, 20);
-drawBuildArea();
+//drawBuildArea();
+drawPhoneStand();
